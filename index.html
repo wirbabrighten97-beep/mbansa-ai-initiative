@@ -1,766 +1,440 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBANSA - Mbam & Nkum Students' Association</title>
+    <title>MBANSA AI Initiative | Official Web Portal</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/lucide@0.460.0"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
                     colors: {
-                        slateWhite: '#F8FAFC',
-                        deepNavy: '#0F172A',
-                        navyCard: '#1E293B',
-                        royalBlue: '#2563EB',
-                        royalHover: '#1D4ED8',
-                        emeraldAccent: '#10B981',
-                        slateBorder: '#CBD5E1'
+                        emerald: {
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        slate: {
+                            900: '#0f172a',
+                        },
+                        champagne: '#fef3c7'
                     }
                 }
             }
         }
     </script>
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; color: #0F172A; }
-        .chat-scroll::-webkit-scrollbar { width: 6px; }
-        .chat-scroll::-webkit-scrollbar-track { background: #F1F5F9; }
-        .chat-scroll::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 4px; }
-        .msg pre { background: #0F172A; color: #E2E8F0; padding: .75rem; border-radius: .5rem; overflow-x: auto; font-size: .75rem; }
-        .msg code { font-family: ui-monospace, monospace; }
-        .msg :not(pre) > code { background: #E2E8F0; padding: 0 .25rem; border-radius: .25rem; }
-        .msg ul { list-style: disc; padding-left: 1.25rem; }
-    </style>
 </head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-<body class="min-h-screen flex flex-col bg-slateWhite text-deepNavy antialiased selection:bg-royalBlue selection:text-white">
-
-    <!-- Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 bg-deepNavy rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-md border border-slate-700">M</div>
-                    <div>
-                        <span class="text-xl font-bold tracking-tight text-deepNavy block leading-tight">MBANSA</span>
-                        <span class="text-xs text-slate-500 font-medium tracking-wide">Mbam & Nkum Students' Assoc.</span>
-                    </div>
+    <!-- Navigation Bar - Dynamic Island Style -->
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <div class="bg-black/90 backdrop-blur-xl rounded-full px-6 py-3 shadow-2xl border border-white/10 flex items-center gap-6">
+            <!-- Logo -->
+            <div class="flex items-center gap-3 pr-6 border-r border-white/20">
+                <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center text-black font-bold text-sm shadow-lg">
+                    MB
                 </div>
-
-                <nav class="hidden lg:flex items-center space-x-1">
-                    <a href="#roadmap" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-royalBlue transition-colors rounded-lg hover:bg-slate-100">Roadmap</a>
-                    <a href="#impact" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-royalBlue transition-colors rounded-lg hover:bg-slate-100">Impact Sectors</a>
-                    <a href="#ai-assistant" class="px-3.5 py-2 text-sm font-semibold text-royalBlue bg-blue-50 border border-blue-200 rounded-lg flex items-center gap-1.5 hover:bg-blue-100 transition-colors">
-                        <i data-lucide="bot" class="w-4 h-4 text-royalBlue"></i>
-                        <span>AI Learning Hub</span>
-                    </a>
-                    <a href="#registration" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-royalBlue transition-colors rounded-lg hover:bg-slate-100">Portal</a>
-                </nav>
-
-                <div class="hidden lg:flex items-center gap-3">
-                    <button onclick="openModal('diasporaModal')" class="px-4 py-2 text-sm font-semibold text-deepNavy bg-slate-100 border border-slate-300 rounded-xl hover:bg-slate-200 transition-all">Diaspora & Mentors</button>
-                    <button onclick="openModal('momoModal')" class="px-4 py-2 text-sm font-semibold text-white bg-royalBlue rounded-xl shadow-sm hover:bg-royalHover transition-all flex items-center gap-2">
-                        <i data-lucide="heart-handshake" class="w-4 h-4"></i>
-                        <span>Support / Financials</span>
-                    </button>
+                <div class="hidden sm:block">
+                    <h1 class="text-sm font-bold text-white tracking-tight">MBANSA</h1>
                 </div>
+            </div>
 
-                <div class="lg:hidden">
-                    <button type="button" onclick="toggleMobileNav()" class="p-2 rounded-lg text-slate-600 hover:text-deepNavy hover:bg-slate-100 focus:outline-none" aria-label="Menu">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
-                </div>
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center gap-1">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-full text-sm font-medium text-white bg-white/20 hover:bg-white/30 transition-all">Home</button>
+                <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all">About</button>
+                <button onclick="switchTab('ai-hub')" id="nav-ai-hub" class="nav-btn px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all">Learning Hub</button>
+                <button onclick="switchTab('portal')" id="nav-portal" class="nav-btn px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all">Portal</button>
+                <button onclick="switchTab('roadmap')" id="nav-roadmap" class="nav-btn px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all">Roadmap</button>
+                <button onclick="switchTab('support')" id="nav-support" class="nav-btn px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all">Support</button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-white hover:text-emerald-300 focus:outline-none p-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
-            <a href="#roadmap" onclick="toggleMobileNav()" class="block px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">3-Year Roadmap</a>
-            <a href="#impact" onclick="toggleMobileNav()" class="block px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Community Impact</a>
-            <a href="#ai-assistant" onclick="toggleMobileNav()" class="px-3 py-2 text-base font-semibold text-royalBlue bg-blue-50 rounded-lg flex items-center gap-2">
-                <i data-lucide="bot" class="w-5 h-5"></i>
-                <span>AI Learning Hub</span>
-            </a>
-            <a href="#registration" onclick="toggleMobileNav()" class="block px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Student Registration</a>
-            <div class="pt-3 border-t border-slate-200 flex flex-col gap-2">
-                <button onclick="openModal('diasporaModal'); toggleMobileNav();" class="w-full text-center px-4 py-2.5 text-sm font-semibold text-deepNavy bg-slate-100 border border-slate-300 rounded-xl">Diaspora & Mentors</button>
-                <button onclick="openModal('momoModal'); toggleMobileNav();" class="w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-royalBlue rounded-xl">Support / MoMo Transparency</button>
-            </div>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-3 bg-black/95 backdrop-blur-xl rounded-2xl px-4 py-4 space-y-2 shadow-2xl border border-white/10">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-white bg-white/10">Home</button>
+            <button onclick="switchTab('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:bg-white/10">About</button>
+            <button onclick="switchTab('ai-hub'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:bg-white/10">Learning Hub</button>
+            <button onclick="switchTab('portal'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:bg-white/10">Student Portal</button>
+            <button onclick="switchTab('roadmap'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:bg-white/10">Roadmap</button>
+            <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:bg-white/10">Support</button>
         </div>
     </header>
 
-    <!-- Hero Banner -->
-    <section class="relative bg-deepNavy text-white py-20 lg:py-28 overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-emeraldAccent text-xs font-semibold tracking-wide">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i>
-                        <span>Official Institutional Portal • Bui Division</span>
-                    </div>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
-                        Empowering Youth in Mbam & Nkum Through Education & Innovation
-                    </h1>
-                    <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed">
-                        MBANSA bridges educational opportunities, agricultural tech advancement, and local community leadership for scholars across Bui Division, Cameroon.
-                    </p>
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8">
+
+        <!-- TAB 1: HOME / OVERVIEW -->
+        <section id="tab-home" class="tab-content space-y-10">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-emerald-800 via-emerald-700 to-emerald-900 rounded-2xl p-8 sm:p-16 text-white shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                <div class="relative z-10 max-w-2xl space-y-6">
+                    <span class="bg-white/10 backdrop-blur-sm text-emerald-50 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-white/20">Official Digital Platform</span>
+                    <h2 class="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">Empowering Mbam Nkum Youth Through Digital Innovation</h2>
+                    <p class="text-emerald-100 text-base sm:text-lg leading-relaxed">Bridging the digital divide with modern learning tools, agricultural technology support, and academic guidance for every student in our community.</p>
                     <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="#ai-assistant" class="px-6 py-3.5 bg-royalBlue hover:bg-royalHover text-white text-sm font-bold rounded-xl transition-all shadow-lg flex items-center gap-2">
-                            <i data-lucide="sparkles" class="w-4 h-4"></i>
-                            <span>Launch AI Learning Hub</span>
-                        </a>
-                        <a href="#registration" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl border border-white/20 transition-all flex items-center gap-2">
-                            <i data-lucide="user-plus" class="w-4 h-4"></i>
-                            <span>Register Student Member</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 bg-navyCard border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-                    <h3 class="text-lg font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center justify-between">
-                        <span>Key Metrics</span>
-                        <span class="text-xs bg-emeraldAccent/10 text-emeraldAccent px-2.5 py-1 rounded-md font-semibold">2026 Active</span>
-                    </h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-4 bg-deepNavy rounded-xl border border-slate-800">
-                            <div class="text-2xl font-extrabold text-white">1,250+</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Registered Scholars</div>
-                        </div>
-                        <div class="p-4 bg-deepNavy rounded-xl border border-slate-800">
-                            <div class="text-2xl font-extrabold text-white">18</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Sub-Divisional Hubs</div>
-                        </div>
-                        <div class="p-4 bg-deepNavy rounded-xl border border-slate-800">
-                            <div class="text-2xl font-extrabold text-white">85%</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">STEM & Agri Support</div>
-                        </div>
-                        <div class="p-4 bg-deepNavy rounded-xl border border-slate-800">
-                            <div class="text-2xl font-extrabold text-emeraldAccent">100%</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Audited Transparency</div>
-                        </div>
+                        <button onclick="switchTab('ai-hub')" class="bg-white text-emerald-900 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-emerald-50 transition">Access Learning Hub</button>
+                        <button onclick="switchTab('about')" class="bg-emerald-900/50 border border-emerald-500/50 text-white font-medium px-6 py-3 rounded-xl hover:bg-emerald-900 transition">Learn More</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- AI Learning Hub -->
-    <section id="ai-assistant" class="py-16 bg-slate-50 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
-                <div>
-                    <div class="inline-flex items-center gap-2 text-royalBlue text-xs font-bold uppercase tracking-wider mb-2">
-                        <i data-lucide="cpu" class="w-4 h-4"></i>
-                        <span>Institutional Learning Utility</span>
+            <!-- Core Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-deepNavy">MBANSA AI Student Assistant</h2>
-                    <p class="text-sm text-slate-600 mt-1">Educational support powered by the Gemini API for STEM, agriculture tech, and revision guidance.</p>
+                    <h3 class="text-lg font-semibold text-slate-900 mb-2">Digital Literacy & Education</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Promoting academic excellence, girl-child education, and modern computing skills across all educational levels.</p>
                 </div>
-                <div class="mt-4 md:mt-0 flex items-center gap-2">
-                    <span class="flex h-3 w-3 relative">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emeraldAccent"></span>
-                    </span>
-                    <span class="text-xs font-semibold text-slate-700">Assistant Online</span>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900 mb-2">Local Problem Solving</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Leveraging technology to address agricultural productivity, youth unemployment, and community welfare in Ndzevru and beyond.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900 mb-2">Solidarity & Progress</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Fostering unity, sharing in joy and sorrow, and establishing robust institutional frameworks for sustainable growth.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="bg-white border border-slate-200 rounded-2xl shadow-lg overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
-
-                <!-- Sidebar -->
-                <div class="lg:col-span-4 bg-slate-100 p-6 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Prompt Categories</h3>
-                        <div class="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0" id="categoryTabs">
-                            <button onclick="switchCategory('all')" id="tab-all" class="px-4 py-2.5 rounded-xl text-left text-xs font-bold bg-white text-royalBlue border border-royalBlue shadow-sm transition-all whitespace-nowrap">
-                                <i data-lucide="layout-grid" class="w-3.5 h-3.5 inline mr-1.5"></i> All Prompts
-                            </button>
-                            <button onclick="switchCategory('agri')" id="tab-agri" class="px-4 py-2.5 rounded-xl text-left text-xs font-semibold text-slate-700 hover:bg-white hover:text-deepNavy transition-all whitespace-nowrap">
-                                <i data-lucide="sprout" class="w-3.5 h-3.5 inline mr-1.5"></i> Agriculture & Tech
-                            </button>
-                            <button onclick="switchCategory('code')" id="tab-code" class="px-4 py-2.5 rounded-xl text-left text-xs font-semibold text-slate-700 hover:bg-white hover:text-deepNavy transition-all whitespace-nowrap">
-                                <i data-lucide="code" class="w-3.5 h-3.5 inline mr-1.5"></i> Coding & STEM
-                            </button>
-                            <button onclick="switchCategory('study')" id="tab-study" class="px-4 py-2.5 rounded-xl text-left text-xs font-semibold text-slate-700 hover:bg-white hover:text-deepNavy transition-all whitespace-nowrap">
-                                <i data-lucide="book-open" class="w-3.5 h-3.5 inline mr-1.5"></i> Exam Prep & Revision
-                            </button>
-                        </div>
-
-                        <div class="mt-6">
-                            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Quick Questions</h4>
-                            <div class="space-y-2" id="quickPromptButtons"></div>
-                        </div>
+        <!-- TAB 2: ABOUT MBANSA -->
+        <section id="tab-about" class="tab-content hidden space-y-8">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="text-emerald-700 font-semibold text-sm">Institutional Identity</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-emerald-900">Mbam Nkum All Students Association (MBANSA)</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
+                    <div class="space-y-3 bg-emerald-50/50 p-5 rounded-2xl border border-emerald-100">
+                        <p><strong>Headquarters:</strong> Ndzevru in Mbam Nkum[cite: 2]</p>
+                        <p><strong>Legal Reference:</strong> No. E26/PS/118/24 Sept 2009[cite: 2]</p>
+                        <p><strong>Motto:</strong> Solidarity, Education and Progress[cite: 2]</p>
+                        <p><strong>Languages:</strong> Lamnso (Working), English & French (Official)[cite: 2]</p>
                     </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-200">
-                        <div class="flex items-center gap-2 text-xs text-slate-500">
-                            <i data-lucide="shield-check" class="w-4 h-4 text-emeraldAccent"></i>
-                            <span>Educational AI Sandbox</span>
-                        </div>
+                    <div class="space-y-3 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <p><strong>Character:</strong> Non-political, non-profit making, cultural, socio-economic, and developmental[cite: 2].</p>
+                        <p><strong>Emblem:</strong> A green residential and farming valley situated along flowing rivers surrounded by mountains[cite: 2].</p>
                     </div>
                 </div>
 
-                <!-- Chat -->
-                <div class="lg:col-span-8 p-6 flex flex-col justify-between bg-white">
-                    <div class="pb-4 border-b border-slate-200 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-lg bg-royalBlue/10 border border-royalBlue/20 flex items-center justify-center text-royalBlue">
-                                <i data-lucide="bot" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-deepNavy">MBANSA Academic Tutor</h4>
-                                <p class="text-xs text-slate-500">Ask questions in English or French</p>
-                            </div>
-                        </div>
-                        <button onclick="clearChat()" class="text-xs font-semibold text-slate-500 hover:text-red-600 border border-slate-200 rounded-lg px-2.5 py-1.5 transition-colors flex items-center gap-1">
-                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                            <span>Clear Conversation</span>
-                        </button>
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xl font-bold text-emerald-900">Core Objectives (Article 6)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">✨ Foster unity amongst members[cite: 2]</div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">📚 Promote academic excellence within and without Mbam Valley[cite: 2]</div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">👧 Promote education of the girl child[cite: 2]</div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">🛡️ Contribute in the global fight against social ills[cite: 2]</div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">🌾 Fight against poverty and unemployment[cite: 2]</div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">🌱 Conserve and protect our natural environment[cite: 2]</div>
                     </div>
+                </div>
 
-                    <div id="chatMessages" class="chat-scroll my-4 space-y-4 h-[380px] overflow-y-auto pr-2">
-                        <div class="flex gap-3 items-start">
-                            <div class="w-8 h-8 rounded-lg bg-deepNavy text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">AI</div>
-                            <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 max-w-[85%] border border-slate-200">
-                                <p class="text-xs font-bold text-deepNavy mb-1">MBANSA Learning Assistant</p>
-                                <p class="text-sm text-slate-700 leading-relaxed">
-                                    Greetings! I am the MBANSA AI Learning Assistant. You can ask me homework questions, agricultural technology advice, coding explanations, or exam revision guidance tailored for scholars in Mbam, Nkum, and the wider Bui Division.
-                                </p>
-                            </div>
-                        </div>
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xl font-bold text-emerald-900">Executive Departments (Article 13)</h3>
+                    <p class="text-slate-600 text-sm">The elected executive serves a 4-year renewable term[cite: 2] across 10 official departments:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Presidency</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Secretariat</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Finance</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Public Relations (PRO)</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Social & Cultural (SOCAC)</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Sports</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Discipline</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Special Duties</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Women Affairs</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1.5 rounded-lg">Auditor</span>
                     </div>
-
-                    <form onsubmit="handleChatSubmit(event)" class="pt-3 border-t border-slate-200">
-                        <div class="flex items-center gap-2">
-                            <input type="text" id="userInput" autocomplete="off"
-                                placeholder="Ask a question (e.g., Explain Newton's laws simply...)"
-                                class="flex-1 text-sm bg-slate-50 border border-slate-300 focus:border-royalBlue focus:bg-white focus:outline-none rounded-xl px-4 py-3 text-deepNavy placeholder-slate-400">
-                            <button type="submit" id="sendBtn"
-                                class="px-5 py-3 bg-royalBlue hover:bg-royalHover disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition-all flex items-center gap-2 shrink-0">
-                                <span>Send</span>
-                                <i data-lucide="send" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Roadmap -->
-    <section id="roadmap" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="text-royalBlue text-xs font-bold uppercase tracking-wider mb-2">Institutional Masterplan</div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-deepNavy">3-Year Strategic Implementation Roadmap</h2>
-                <p class="text-sm sm:text-base text-slate-600 mt-2">Structured development timeline (2025 – 2028) focused on digital literacy, scholarship funding, and agricultural modernization.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-slateWhite border border-slate-200 rounded-2xl p-6 relative hover:shadow-md transition-all">
-                    <div class="w-10 h-10 bg-royalBlue text-white font-bold rounded-xl flex items-center justify-center mb-4">Y1</div>
-                    <span class="text-xs font-bold text-royalBlue uppercase tracking-wider">Phase 1: Foundation (2025-2026)</span>
-                    <h3 class="text-xl font-bold text-deepNavy mt-1 mb-3">Digital Infrastructure & AI Access</h3>
-                    <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Establish MBANSA AI Learning Hub for regional schools.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Launch central database for verified student registration.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Distribute initial educational grants to 100 scholars.</span></li>
-                    </ul>
+        <!-- TAB 3: LEARNING HUB -->
+        <section id="tab-ai-hub" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="text-emerald-700 font-semibold text-sm">Digital Learning Assistant</span>
+                    <h2 class="text-2xl font-bold text-slate-900">MBANSA Study & Agri-Tech Hub</h2>
                 </div>
 
-                <div class="bg-slateWhite border border-slate-200 rounded-2xl p-6 relative hover:shadow-md transition-all">
-                    <div class="w-10 h-10 bg-deepNavy text-white font-bold rounded-xl flex items-center justify-center mb-4">Y2</div>
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Phase 2: Expansion (2026-2027)</span>
-                    <h3 class="text-xl font-bold text-deepNavy mt-1 mb-3">Agritech & STEM Labs</h3>
-                    <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Construct 2 community computer labs in Mbam and Nkum.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Roll out practical agricultural technology workshops for youth.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Form diaspora mentorship matching network.</span></li>
-                    </ul>
+                <!-- Suggested Prompt Chips -->
+                <div class="space-y-2">
+                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Quick Topics:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setPrompt('How can I apply modern agricultural techniques to improve crop yields in Ndzevru?')" class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition">Agri-Tech Guidance</button>
+                        <button onclick="setPrompt('Explain basic C programming concepts for university coursework.')" class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition">C Programming Help</button>
+                        <button onclick="setPrompt('Give me advice on girl-child education and overcoming academic challenges.')" class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition">Student Empowerment</button>
+                    </div>
                 </div>
 
-                <div class="bg-slateWhite border border-slate-200 rounded-2xl p-6 relative hover:shadow-md transition-all">
-                    <div class="w-10 h-10 bg-slate-800 text-white font-bold rounded-xl flex items-center justify-center mb-4">Y3</div>
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Phase 3: Sustainability (2027-2028)</span>
-                    <h3 class="text-xl font-bold text-deepNavy mt-1 mb-3">Enterprise & Endowment</h3>
-                    <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Establish MBANSA Revolving Student Micro-Grant Fund.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Partner with national technical universities for placements.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-emeraldAccent shrink-0 mt-0.5"></i><span>Achieve 100% self-sustaining institutional financing model.</span></li>
-                    </ul>
+                <!-- Chat Box Screen -->
+                <div id="chat-container" class="h-96 bg-slate-50 rounded-xl p-4 border border-slate-200 overflow-y-auto space-y-4 flex flex-col">
+                    <div class="bg-emerald-800 text-white p-4 rounded-xl max-w-lg shadow-sm">
+                        <p class="text-sm">Hello student! I am your MBANSA learning assistant. How can I help you with your studies, agricultural projects, or association goals today?</p>
+                    </div>
+                </div>
+
+                <!-- Chat Input Form -->
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Ask a question or type your topic..." class="flex-grow px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none focus:border-emerald-600 text-sm" onkeypress="handleKeyPress(event)">
+                    <button onclick="sendChatMessage()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-semibold px-6 py-3 rounded-xl transition text-sm">Send</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Impact -->
-    <section id="impact" class="py-20 bg-slateWhite border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="text-royalBlue text-xs font-bold uppercase tracking-wider mb-2">Focus Areas</div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-deepNavy">Community Impact Sectors</h2>
-                <p class="text-sm sm:text-base text-slate-600 mt-2">Tailored development strategies built specifically for the local socio-economic dynamics of Bui Division.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-royalBlue/40 transition-all">
-                    <div class="w-12 h-12 bg-blue-50 text-royalBlue rounded-xl flex items-center justify-center mb-4"><i data-lucide="graduation-cap" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-deepNavy mb-2">Academic Excellence</h3>
-                    <p class="text-xs sm:text-sm text-slate-600">Scholarship awards, national exam preparation, and textbook library access for secondary and tertiary students.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-royalBlue/40 transition-all">
-                    <div class="w-12 h-12 bg-emerald-50 text-emeraldAccent rounded-xl flex items-center justify-center mb-4"><i data-lucide="tractor" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-deepNavy mb-2">Agritech & Sustainable Farming</h3>
-                    <p class="text-xs sm:text-sm text-slate-600">Integrating modern soil science and AI-driven agricultural tools to empower young farmers in Mbam and Nkum.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-royalBlue/40 transition-all">
-                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4"><i data-lucide="code-2" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-deepNavy mb-2">Digital Literacy & Code</h3>
-                    <p class="text-xs sm:text-sm text-slate-600">Hands-on software development bootcamps and computer literacy classes held across local community halls.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-royalBlue/40 transition-all">
-                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4"><i data-lucide="users" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-deepNavy mb-2">Cultural & Social Leadership</h3>
-                    <p class="text-xs sm:text-sm text-slate-600">Fostering unity, civic engagement, and historical preservation among students from Mbam and Nkum origins.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Registration -->
-    <section id="registration" class="py-20 bg-white border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-slateWhite border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-lg">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-deepNavy">Student Membership Portal</h2>
-                    <p class="text-xs sm:text-sm text-slate-600 mt-1">Register officially with MBANSA to receive your membership ID card and scholarship eligibility code.</p>
+        <!-- TAB 4: STUDENT PORTAL & REGISTRATION -->
+        <section id="tab-portal" class="tab-content hidden space-y-6">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 max-w-3xl mx-auto space-y-6">
+                <div class="border-b pb-4 text-center">
+                    <span class="text-emerald-700 font-semibold text-sm">Annual Membership</span>
+                    <h2 class="text-2xl font-bold text-emerald-900">Student Portal Registration</h2>
+                    <p class="text-slate-600 text-sm mt-1">Register your membership to receive your official digital receipt and constitution copy.</p>
                 </div>
 
-                <form onsubmit="handleRegistration(event)" class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <form id="registration-form" onsubmit="handleRegistration(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="regName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Full Name</label>
-                            <input type="text" id="regName" required placeholder="e.g. Berinyuy Claude" class="w-full text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-deepNavy focus:border-royalBlue focus:outline-none">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                            <input type="text" id="reg-name" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="e.g. Wirba Brighten">
                         </div>
                         <div>
-                            <label for="regCommunity" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Community / Sub-Division</label>
-                            <select id="regCommunity" required class="w-full text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-deepNavy focus:border-royalBlue focus:outline-none">
-                                <option value="">Select Region</option>
-                                <option value="Mbam Central">Mbam Central</option>
-                                <option value="Nkum Sub-Division">Nkum Sub-Division</option>
-                                <option value="Kumbo / Neighboring Hubs">Kumbo / Neighboring Hubs</option>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Institution / School</label>
+                            <input type="text" id="reg-school" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="e.g. University of Bamenda">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Membership Category</label>
+                            <select id="reg-category" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
+                                <option value="By Birth">By Birth (Schooled in Mbam Nkum / Resident)</option>
+                                <option value="Descendant / Elite">Descendant of Mbam Elites</option>
+                                <option value="By Adoption">By Adoption / Allegiance</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="regSchool" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Institution / School</label>
-                            <input type="text" id="regSchool" required placeholder="e.g. GBHS Nkum / Univ of Bamenda" class="w-full text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-deepNavy focus:border-royalBlue focus:outline-none">
-                        </div>
-                        <div>
-                            <label for="regField" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Field of Study</label>
-                            <input type="text" id="regField" required placeholder="e.g. Agricultural Engineering / Sciences" class="w-full text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-deepNavy focus:border-royalBlue focus:outline-none">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number (MoMo / WhatsApp)</label>
+                            <input type="tel" id="reg-phone" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="+237 ...">
                         </div>
                     </div>
-
-                    <div>
-                        <label for="regPhone" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Phone Number (MTN / Orange)</label>
-                        <input type="tel" id="regPhone" required placeholder="e.g. +237 670 000 000" class="w-full text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-deepNavy focus:border-royalBlue focus:outline-none">
-                    </div>
-
-                    <button type="submit" class="w-full py-3.5 bg-royalBlue hover:bg-royalHover text-white font-bold text-sm rounded-xl transition-all shadow-md">
-                        Complete Registration & Generate Official Receipt
-                    </button>
+                    <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 rounded-xl transition shadow">Generate Digital Registration Receipt</button>
                 </form>
 
-                <div id="receiptContainer" class="hidden mt-8 pt-8 border-t border-slate-300">
-                    <div id="printableReceipt" class="bg-white p-6 border-2 border-dashed border-royalBlue rounded-2xl space-y-4">
-                        <div class="flex justify-between items-start border-b border-slate-200 pb-4">
-                            <div>
-                                <h3 class="text-lg font-extrabold text-deepNavy">MBANSA Membership Confirmation</h3>
-                                <p class="text-xs text-slate-500">Mbam & Nkum Students' Association Official Document</p>
-                            </div>
-                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md">VERIFIED</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 text-xs">
-                            <div><span class="text-slate-500 block">Registration ID:</span><strong id="recId" class="text-deepNavy">MBN-2026-0000</strong></div>
-                            <div><span class="text-slate-500 block">Full Name:</span><strong id="recName" class="text-deepNavy">-</strong></div>
-                            <div><span class="text-slate-500 block">Community Hub:</span><strong id="recCommunity" class="text-deepNavy">-</strong></div>
-                            <div><span class="text-slate-500 block">School/Institution:</span><strong id="recSchool" class="text-deepNavy">-</strong></div>
-                        </div>
-                        <div class="pt-2 text-center text-xs text-slate-400">
-                            Keep this receipt number for AI Learning Hub priority access & grant claims.
-                        </div>
+                <!-- Receipt Output Card (Hidden by default) -->
+                <div id="receipt-card" class="hidden bg-emerald-50 border-2 border-emerald-600 p-6 rounded-2xl space-y-4">
+                    <div class="flex justify-between items-center border-b border-emerald-200 pb-3">
+                        <h3 class="font-bold text-emerald-900 text-lg">Official MBANSA Membership Receipt</h3>
+                        <span class="bg-emerald-800 text-white text-xs px-3 py-1 rounded-full font-semibold">Verified</span>
                     </div>
-                    <button type="button" onclick="window.print()" class="mt-4 text-xs font-semibold text-royalBlue hover:text-royalHover">Print / Save as PDF</button>
+                    <div class="text-sm text-slate-700 space-y-2">
+                        <p><strong>Registration ID:</strong> <span id="rec-id">MBANSA-2026-001</span></p>
+                        <p><strong>Name:</strong> <span id="rec-name"></span></p>
+                        <p><strong>Institution:</strong> <span id="rec-school"></span></p>
+                        <p><strong>Category:</strong> <span id="rec-category"></span></p>
+                        <p><strong>Date:</strong> <span id="rec-date"></span></p>
+                    </div>
+                    <button onclick="window.print()" class="w-full bg-emerald-800 text-white py-2 rounded-xl text-sm font-semibold hover:bg-emerald-900">Print / Save Receipt</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- TAB 5: STRATEGIC ROADMAP -->
+        <section id="tab-roadmap" class="tab-content hidden space-y-6">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="text-emerald-700 font-semibold text-sm">3-Year Strategic Plan</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-emerald-900">MBANSA AI Initiative Roadmap (2026–2028)</h2>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 bg-emerald-800 text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <div>
+                            <h3 class="font-bold text-emerald-900 text-lg">Year 1: Digital Foundation & Portal Deployment (2026)</h3>
+                            <p class="text-slate-600 text-sm mt-1">Deploying the official web portal on Netlify, integrating the Gemini AI Learning Hub, registering student members, and distributing digital constitution copies.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 bg-emerald-800 text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div>
+                            <h3 class="font-bold text-emerald-900 text-lg">Year 2: Community & Agri-Tech Expansion (2027)</h3>
+                            <p class="text-slate-600 text-sm mt-1">Launching regional training workshops in Ndzevru, integrating local agricultural solutions, and expanding girl-child mentorship programs.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 bg-emerald-800 text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <div>
+                            <h3 class="font-bold text-emerald-900 text-lg">Year 3: Institutional Scale & Sustainability (2028)</h3>
+                            <p class="text-slate-600 text-sm mt-1">Establishing permanent diaspora funding channels, scholarship endowments, and advanced technical hubs across Bui Division.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: SUPPORT & DIASPORA -->
+        <section id="tab-support" class="tab-content hidden space-y-6">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 max-w-2xl mx-auto text-center space-y-6">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center text-3xl mx-auto">💬</div>
+                <h2 class="text-2xl font-bold text-emerald-900">Support & Diaspora Network</h2>
+                <p class="text-slate-600 text-sm">Are you an elite, patron, or diaspora member wishing to support the MBANSA AI Initiative morally, materially, or financially?</p>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-left space-y-2 text-sm">
+                    <p><strong>Email Contact:</strong> mbansa_2003@yahoo.com[cite: 2]</p>
+                    <p><strong>Headquarters:</strong> Ndzevru, Mbam Nkum, Bui Division[cite: 2]</p>
+                    <p><strong>Motto:</strong> Solidarity, Education and Progress[cite: 2]</p>
+                </div>
+                <a href="mailto:mbansa_2003@yahoo.com" class="inline-block bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-8 py-3 rounded-xl transition shadow">Contact Secretariat</a>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-deepNavy text-white py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div class="space-y-3">
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 bg-royalBlue text-white font-extrabold rounded-lg flex items-center justify-center text-sm">M</div>
-                        <span class="text-lg font-bold">MBANSA</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Dedicated to academic empowerment, technological literacy, and community progress across Mbam and Nkum.</p>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Quick Navigation</h4>
-                    <ul class="space-y-2 text-xs text-slate-400">
-                        <li><a href="#roadmap" class="hover:text-white">Strategic Roadmap</a></li>
-                        <li><a href="#impact" class="hover:text-white">Impact Sectors</a></li>
-                        <li><a href="#ai-assistant" class="hover:text-white">AI Learning Hub</a></li>
-                        <li><a href="#registration" class="hover:text-white">Student Registration</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Transparency</h4>
-                    <ul class="space-y-2 text-xs text-slate-400">
-                        <li><button onclick="openModal('momoModal')" class="hover:text-white">Mobile Money Audits</button></li>
-                        <li><button onclick="openModal('diasporaModal')" class="hover:text-white">Diaspora Network</button></li>
-                        <li><span class="text-emeraldAccent font-semibold">Bui Division Executive Committee</span></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Contact Secretariat</h4>
-                    <p class="text-xs text-slate-400">Main Hub: Kumbo / Nkum, Bui Division, NW Region, Cameroon</p>
-                    <p class="text-xs text-slate-400 mt-2">Email: contact@mbansa.org</p>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-                &copy; 2026 Mbam and Nkum Students' Association (MBANSA). All Rights Reserved.
-            </div>
+    <footer class="bg-emerald-900 text-emerald-100 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 text-sm">
+            <p>&copy; 2026 MBANSA (Mbam Nkum All Students Association). All rights reserved.</p>
+            <p class="text-xs text-emerald-300">Legal Ref: E26/PS/118/24 Sept 2009 | Headquarters: Ndzevru[cite: 2]</p>
         </div>
     </footer>
 
-    <!-- Diaspora Modal -->
-    <div id="diasporaModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeModal('diasporaModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600" aria-label="Close">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <div class="mb-6">
-                <h3 class="text-xl font-bold text-deepNavy">Diaspora & Mentor Network</h3>
-                <p class="text-xs text-slate-600 mt-1">Connect with students in Mbam & Nkum to offer career coaching, scholarship funding, or technical mentorship.</p>
-            </div>
-            <form onsubmit="handleDiasporaSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
-                    <input type="text" required placeholder="Dr. / Mr. / Ms. Name" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-deepNavy">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Current Location (Country/City)</label>
-                    <input type="text" required placeholder="e.g. Yaoundé / USA / UK / Douala" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-deepNavy">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Area of Mentorship</label>
-                    <select required class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-deepNavy">
-                        <option value="STEM & Software">STEM & Software Engineering</option>
-                        <option value="Agriculture Tech">Agriculture & Soil Tech</option>
-                        <option value="Medicine & Health">Medicine & Health Sciences</option>
-                        <option value="Scholarship Sponsorship">Financial Sponsorship / Grants</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full py-3 bg-royalBlue text-white text-sm font-bold rounded-xl hover:bg-royalHover transition-all">Submit Mentor Profile</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MoMo Modal -->
-    <div id="momoModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeModal('momoModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600" aria-label="Close">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <div class="mb-6">
-                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-md mb-2">
-                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Audited Account
-                </div>
-                <h3 class="text-xl font-bold text-deepNavy">Financial Support & MoMo Transparency</h3>
-                <p class="text-xs text-slate-600 mt-1">All donations go directly to student scholarship funds and local AI hub operations.</p>
-            </div>
-
-            <div class="space-y-4">
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <div class="flex justify-between items-center text-xs font-bold text-deepNavy">
-                        <span>MTN Mobile Money (MoMo)</span>
-                        <span class="text-amber-600">Official Treasury</span>
-                    </div>
-                    <!-- TODO: replace with the REAL treasurer number before publishing -->
-                    <div class="text-sm font-mono text-slate-800 bg-white p-2.5 rounded-lg border border-slate-200 flex justify-between items-center">
-                        <span>+237 670 000 123</span>
-                        <span class="text-xs text-slate-400">(MBANSA Treasurer)</span>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <div class="flex justify-between items-center text-xs font-bold text-deepNavy">
-                        <span>Orange Money</span>
-                        <span class="text-orange-600">Official Treasury</span>
-                    </div>
-                    <!-- TODO: replace with the REAL number before publishing -->
-                    <div class="text-sm font-mono text-slate-800 bg-white p-2.5 rounded-lg border border-slate-200 flex justify-between items-center">
-                        <span>+237 690 000 456</span>
-                        <span class="text-xs text-slate-400">(MBANSA Executive)</span>
-                    </div>
-                </div>
-
-                <div class="text-xs leading-relaxed bg-blue-50 p-3 rounded-xl border border-blue-100 text-blue-900">
-                    <strong>Transparency:</strong> Financial reports are published quarterly to all registered student delegates and diaspora sponsors.
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- JavaScript Logic -->
     <script>
-        lucide.createIcons();
-
-        // ---------- UI helpers ----------
-        function openModal(id) {
-            const el = document.getElementById(id);
-            el.classList.remove('hidden');
-            el.classList.add('flex');
-        }
-        function closeModal(id) {
-            const el = document.getElementById(id);
-            el.classList.add('hidden');
-            el.classList.remove('flex');
-        }
-        function toggleMobileNav() {
-            document.getElementById('mobileDrawer').classList.toggle('hidden');
-        }
-        // Close modals with Escape or by clicking the dark backdrop
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') ['diasporaModal', 'momoModal'].forEach(closeModal);
-        });
-        ['diasporaModal', 'momoModal'].forEach(id => {
-            document.getElementById(id).addEventListener('click', e => {
-                if (e.target.id === id) closeModal(id);
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-white', 'bg-white/20');
+                btn.classList.add('text-white/70');
             });
-        });
 
-        // ---------- Registration ----------
-        function handleRegistration(e) {
-            e.preventDefault();
-            const randomId = 'MBN-2026-' + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('recId').textContent = randomId;
-            document.getElementById('recName').textContent = document.getElementById('regName').value;
-            document.getElementById('recCommunity').textContent = document.getElementById('regCommunity').value;
-            document.getElementById('recSchool').textContent = document.getElementById('regSchool').value;
-            const box = document.getElementById('receiptContainer');
-            box.classList.remove('hidden');
-            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        function handleDiasporaSubmit(e) {
-            e.preventDefault();
-            alert('Thank you for registering with the MBANSA Diaspora & Mentor Network. An executive officer will contact you.');
-            e.target.reset();
-            closeModal('diasporaModal');
-        }
-
-        // ---------- AI LEARNING HUB (Gemini) ----------
-        // OPTION A (best, safe for production): set PROXY_URL to your own backend that holds the key.
-        // OPTION B (local testing ONLY): paste a key from https://aistudio.google.com/apikey below.
-        //   Anyone who opens the page can read this key, so never publish it in a public site.
-        const PROXY_URL = "";
-        const GEMINI_API_KEY = "";
-        const GEMINI_MODEL = "gemini-2.5-flash";   // change if you prefer another Gemini model
-
-        const SYSTEM_PROMPT = "You are the MBANSA AI Academic Assistant, built for students in Mbam, Nkum, and Bui Division, Cameroon. Provide clear, encouraging, practical, and highly educational answers. Reply in the language the student writes in (English or French). Use bullet points or code blocks where helpful. Keep formatting professional.";
-
-        const history = [];   // conversation memory
-
-        const quickPromptsData = {
-            all: [
-                { label: "How can AI improve corn/potato farming in Bui?", prompt: "How can AI and simple digital tools improve corn and potato farming yields in Bui Division, Cameroon?" },
-                { label: "Explain C programming loops simply", prompt: "Explain C programming loops (for, while, do-while) simply with clean code examples for a high school student." },
-                { label: "Help me organize a daily revision timetable", prompt: "Help me organize a daily revision timetable for GCE Advanced Level examinations." }
-            ],
-            agri: [
-                { label: "Soil erosion prevention in hilly farmland", prompt: "What are practical, low-cost methods for farmers in Mbam and Nkum to prevent soil erosion on hilly farmland?" },
-                { label: "Storage methods for Irish potatoes", prompt: "Explain best post-harvest storage techniques for Irish potatoes in North-West Cameroon." }
-            ],
-            code: [
-                { label: "Python basics vs C language", prompt: "Compare Python basics with C language for a beginner student in computer science." },
-                { label: "How does the Internet work?", prompt: "Explain how the Internet works simply, including IP addresses and web servers." }
-            ],
-            study: [
-                { label: "GCE O-Level Biology memory tips", prompt: "Share memory tips and study techniques for GCE O-Level Biology." },
-                { label: "How to stay focused during exams", prompt: "Provide effective strategies to maintain focus and reduce exam anxiety during study sessions." }
-            ]
-        };
-
-        const TAB_ACTIVE = "px-4 py-2.5 rounded-xl text-left text-xs font-bold bg-white text-royalBlue border border-royalBlue shadow-sm transition-all whitespace-nowrap";
-        const TAB_IDLE = "px-4 py-2.5 rounded-xl text-left text-xs font-semibold text-slate-700 hover:bg-white hover:text-deepNavy transition-all whitespace-nowrap";
-
-        function switchCategory(cat) {
-            ['all', 'agri', 'code', 'study'].forEach(c => {
-                document.getElementById('tab-' + c).className = (c === cat) ? TAB_ACTIVE : TAB_IDLE;
-            });
-            const container = document.getElementById('quickPromptButtons');
-            container.innerHTML = '';
-            (quickPromptsData[cat] || quickPromptsData.all).forEach(item => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = "w-full text-left p-3 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 text-xs font-medium text-slate-800 hover:border-blue-300 transition-all flex items-start justify-between group";
-                btn.addEventListener('click', () => sendQuickPrompt(item.prompt));
-                btn.innerHTML = `<span>"${escapeHtml(item.label)}"</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400 group-hover:text-royalBlue shrink-0 ml-2 mt-0.5"></i>`;
-                container.appendChild(btn);
-            });
-            lucide.createIcons();
-        }
-
-        function sendQuickPrompt(text) {
-            document.getElementById('userInput').value = text;
-            handleChatSubmit();
-        }
-
-        function clearChat() {
-            history.length = 0;
-            window.speechSynthesis && window.speechSynthesis.cancel();
-            document.getElementById('chatMessages').innerHTML = '';
-            addBubble(`<div class="w-8 h-8 rounded-lg bg-deepNavy text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">AI</div>
-                <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 max-w-[85%] border border-slate-200">
-                    <p class="text-xs font-bold text-deepNavy mb-1">MBANSA Learning Assistant</p>
-                    <p class="text-sm text-slate-700 leading-relaxed">Conversation cleared. How else can I support your studies or research today?</p>
-                </div>`, "flex gap-3 items-start");
-        }
-
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) { alert('Text-to-speech is not supported on this browser.'); return; }
-            window.speechSynthesis.cancel();
-            const plain = text.replace(/```[\s\S]*?```/g, ' code block omitted ').replace(/[*#`_]/g, '');
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance(plain));
-        }
-
-        function addBubble(html, cls) {
-            const box = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = cls;
-            div.innerHTML = html;
-            box.appendChild(div);
-            box.scrollTop = box.scrollHeight;
-            lucide.createIcons();
-            return div;
-        }
-
-        async function callGemini() {
-            const body = JSON.stringify({
-                contents: history,
-                systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
-            });
-            let url, headers = { 'Content-Type': 'application/json' };
-            if (PROXY_URL) {
-                url = PROXY_URL;
-            } else if (GEMINI_API_KEY) {
-                url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
-                headers['x-goog-api-key'] = GEMINI_API_KEY;
-            } else {
-                throw new Error("No API key configured. Set GEMINI_API_KEY (testing) or PROXY_URL (production) in the script.");
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-white/70');
+                activeBtn.classList.add('text-white', 'bg-white/20');
             }
-            const res = await fetch(url, { method: 'POST', headers, body });
-            const data = await res.json().catch(() => ({}));
-            if (!res.ok || data.error) throw new Error(data.error?.message || res.statusText || 'Request failed');
-            const reply = data.candidates?.[0]?.content?.parts?.map(p => p.text || '').join('');
-            if (!reply) throw new Error("The model returned an empty response.");
-            return reply;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        async function handleChatSubmit(e) {
-            if (e) e.preventDefault();
-            const input = document.getElementById('userInput');
-            const sendBtn = document.getElementById('sendBtn');
-            const query = input.value.trim();
-            if (!query || sendBtn.disabled) return;
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
 
-            addBubble(`<div class="bg-royalBlue text-white rounded-2xl rounded-tr-none p-4 max-w-[85%] shadow-sm">
-                    <p class="text-xs text-blue-100 font-bold mb-1">You</p>
-                    <p class="text-sm leading-relaxed">${escapeHtml(query)}</p></div>`, "flex gap-3 items-start justify-end");
-            input.value = '';
-            sendBtn.disabled = true;
+        function setPrompt(text) {
+            document.getElementById('chat-input').value = text;
+        }
 
-            const loading = addBubble(`<div class="w-8 h-8 rounded-lg bg-deepNavy text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">AI</div>
-                <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 border border-slate-200 text-slate-500 text-xs flex items-center gap-2">
-                    <i data-lucide="loader-2" class="w-4 h-4 animate-spin text-royalBlue"></i><span>Thinking...</span></div>`, "flex gap-3 items-start");
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
 
-            history.push({ role: "user", parts: [{ text: query }] });
+        async function sendChatMessage() {
+            const inputField = document.getElementById('chat-input');
+            const chatContainer = document.getElementById('chat-container');
+            const userPrompt = inputField.value.trim();
+
+            if (!userPrompt) return;
+
+            // Append user message
+            chatContainer.innerHTML += `
+                <div class="bg-white text-slate-800 p-4 rounded-2xl max-w-lg ml-auto shadow-sm border border-slate-200">
+                    <p class="text-sm"><strong>You:</strong> ${escapeHtml(userPrompt)}</p>
+                </div>
+            `;
+            inputField.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Loading indicator
+            const loadingId = 'loading-' + Date.now();
+            chatContainer.innerHTML += `
+                <div id="${loadingId}" class="bg-emerald-50 text-emerald-900 p-4 rounded-2xl max-w-lg shadow-sm border border-emerald-100">
+                    <p class="text-sm italic">Thinking...</p>
+                </div>
+            `;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
 
             try {
-                const reply = await callGemini();
-                history.push({ role: "model", parts: [{ text: reply }] });
-                loading.remove();
+                const response = await fetch('/.netlify/functions/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userPrompt })
+                });
 
-                const msg = addBubble(`<div class="w-8 h-8 rounded-lg bg-deepNavy text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">AI</div>
-                    <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 max-w-[85%] border border-slate-200 min-w-0">
-                        <div class="flex items-center justify-between mb-2 pb-1 border-b border-slate-200">
-                            <span class="text-xs font-bold text-deepNavy">MBANSA Academic Tutor</span>
-                            <button type="button" class="listen-btn text-[11px] font-semibold text-royalBlue hover:text-royalHover flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-slate-200">
-                                <i data-lucide="volume-2" class="w-3 h-3"></i><span>Listen</span>
-                            </button>
+                const data = await response.json();
+                document.getElementById(loadingId).remove();
+
+                if (data.error) {
+                    chatContainer.innerHTML += `
+                        <div class="bg-red-50 text-red-800 p-4 rounded-2xl max-w-lg shadow-sm border border-red-200">
+                            <p class="text-sm">Error: ${escapeHtml(data.error)}</p>
                         </div>
-                        <div class="msg text-sm text-slate-800 leading-relaxed">${formatResponseText(reply)}</div>
-                    </div>`, "flex gap-3 items-start");
-                msg.querySelector('.listen-btn').addEventListener('click', () => speakText(reply));
-            } catch (err) {
-                console.error("Gemini error:", err);
-                history.pop();   // drop the failed turn so the conversation stays valid
-                loading.remove();
-                addBubble(`<div class="w-8 h-8 rounded-lg bg-red-600 text-white flex items-center justify-center text-xs font-bold shrink-0">!</div>
-                    <div class="bg-red-50 text-red-800 rounded-2xl p-4 text-xs border border-red-200 max-w-[85%]">Couldn't get a response: ${escapeHtml(err.message)}</div>`, "flex gap-3 items-start");
-            } finally {
-                sendBtn.disabled = false;
-                input.focus();
-            }
-        }
-
-        // ---------- Formatting ----------
-        function escapeHtml(str) {
-            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-        }
-
-        // Small safe markdown: code blocks, inline code, bold, bullets, line breaks
-        function formatResponseText(text) {
-            const blocks = [];
-            let s = escapeHtml(text).replace(/```[a-zA-Z]*\n?([\s\S]*?)```/g, (_, code) => {
-                blocks.push(`<pre><code>${code.replace(/\n$/, '')}</code></pre>`);
-                return `\u0000${blocks.length - 1}\u0000`;
-            });
-            s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>')
-                 .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-            const lines = s.split('\n');
-            let out = '', inList = false;
-            for (const line of lines) {
-                const m = line.match(/^\s*[*\-]\s+(.*)$/);
-                if (m) {
-                    if (!inList) { out += '<ul>'; inList = true; }
-                    out += `<li>${m[1]}</li>`;
+                    `;
                 } else {
-                    if (inList) { out += '</ul>'; inList = false; }
-                    out += line.trim() === '' ? '<div class="h-2"></div>' : `<div>${line}</div>`;
+                    chatContainer.innerHTML += `
+                        <div class="bg-emerald-800 text-white p-4 rounded-xl max-w-lg shadow-sm">
+                            <p class="text-sm">${escapeHtml(data.reply)}</p>
+                        </div>
+                    `;
                 }
+            } catch (error) {
+                document.getElementById(loadingId).remove();
+                chatContainer.innerHTML += `
+                    <div class="bg-red-50 text-red-800 p-4 rounded-2xl max-w-lg shadow-sm border border-red-200">
+                        <p class="text-sm">Error connecting to server. Please try again.</p>
+                    </div>
+                `;
             }
-            if (inList) out += '</ul>';
-            return out.replace(/\u0000(\d+)\u0000/g, (_, i) => blocks[i]);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Render the quick-question buttons on load
-        switchCategory('all');
+        function handleRegistration(event) {
+            event.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const school = document.getElementById('reg-school').value;
+            const category = document.getElementById('reg-category').value;
+            const phone = document.getElementById('reg-phone').value;
+
+            document.getElementById('rec-id').innerText = 'MBANSA-2026-' + Math.floor(100 + Math.random() * 900);
+            document.getElementById('rec-name').innerText = name;
+            document.getElementById('rec-school').innerText = school;
+            document.getElementById('rec-category').innerText = category;
+            document.getElementById('rec-date').innerText = new Date().toLocaleDateString();
+
+            document.getElementById('receipt-card').classList.remove('hidden');
+            document.getElementById('receipt-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
     </script>
 </body>
-
 </html>

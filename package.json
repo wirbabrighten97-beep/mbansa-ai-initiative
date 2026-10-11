@@ -1,0 +1,12 @@
+{
+  "name": "mbansa-portal",
+  "version": "1.0.0",
+  "description": "MBANSA Digital Initiative Portal",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step needed for static HTML'"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}
